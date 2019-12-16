@@ -1,5 +1,5 @@
 <template>
-  <sunika />
+  <sample />
 </template>
 
 <script>

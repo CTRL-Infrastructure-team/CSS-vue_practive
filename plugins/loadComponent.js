@@ -1,11 +1,11 @@
 import Vue from 'vue';
 
 
-import sunika from '~/components/UnderstoodCss/sunika';
+import sample from '~/components/UnderstoodCss/sample';
 
 
 Vue.mixin({
   components:{
-    sunika
+    sample
   }
 })
