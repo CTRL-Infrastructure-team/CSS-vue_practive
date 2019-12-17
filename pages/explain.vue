@@ -30,9 +30,10 @@
         <input type="number" v-model.number="boxNumber" max="30" />
       </div>
     </div>
-    <textarea type="textarea" class="textArea" 　v-model="textArea" @input="upDateStyle" />
+    <textarea type="textarea" class="textArea" 　v-model="theTextArea" @input="upDateStyle(true)" />
+    <textarea type="textarea" class="textArea" 　v-model="textArea" @input="upDateStyle(false)" />
     <div class="container" :style="flexStyle">
-      <div class="box main" :style="boxStyle"></div>
+      <div class="box main" :style="theBoxStyle"></div>
       <div class="box" v-for="(box,index) in boxs" :key="index" :style="box"></div>
     </div>
   </div>
@@ -53,6 +54,8 @@ export default {
       alignOption:['stretch','flex-start','flex-end','center','baseline'],
       textArea:"width: 100px;\nmin-height: 100px;",
       boxStyle:"width: 100px;\nmin-height: 100px;",
+      theTextArea:"width: 100px;\nmin-height: 100px;",
+      theBoxStyle:"{width: 100px;\nmin-height: 100px;"
     }
   },
   computed:{
@@ -91,10 +94,15 @@ export default {
     },
   },
   methods:{
-    upDateStyle(){
-      let styleArray = this.textArea.split(/\n/);
-    console.log(styleArray);
+    upDateStyle(bool){
+      let styleArray;
+      if(bool){
+         styleArray = this.theTextArea.split(/\n/);
+        }else{
+         styleArray = this.textArea.split(/\n/);
+      }
       let styleObj = new Object();
+      console.log(styleObj);
       for(const styleItem of styleArray){
         if(!styleItem.includes(":")) return;
         let keyValue = styleItem.split(":");
@@ -103,8 +111,12 @@ export default {
         }
         styleObj[keyValue[0]] = keyValue[1]
       }
-      console.log(styleObj);
-      this.boxStyle = styleObj;
+      if(bool){
+        this.theBoxStyle = styleObj;
+      }else {
+        this.boxStyle = styleObj;
+      }
+      console.log(this.boxStyle,this.theBoxStyle,bool);
     }
   },
   created(){
