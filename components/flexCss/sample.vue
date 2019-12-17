@@ -4,11 +4,9 @@
       <img :src="imgData" alt class="icon" />
     </div>
     <ul class="nav">
-      <li class="box">menu1</li>
-      <li class="box">menu2</li>
-      <li class="box">menu3</li>
-      <li class="box">menu4</li>
-      <li class="box">menu5</li>
+      <li v-for="(value,index) in menuData" :key="index">
+        <nuxt-link :to="value.href">{{velue.title}}</nuxt-link>
+      </li>
     </ul>
   </div>
 </template>
