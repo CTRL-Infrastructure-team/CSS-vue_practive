@@ -1,11 +1,13 @@
 import Vue from 'vue';
 
 
-import sample from '~/components/header/sample';
+import headerComponent from '~/components/header/sample';
+import sample from '~/components/UnderStoodCss/sample';
 
 
 Vue.mixin({
   components:{
-    sample
+    sample,
+    headerComponent
   }
 })
