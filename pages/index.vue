@@ -5,7 +5,8 @@
 <script>
 import AllComponents from '~/plugins/loadComponent';
 
-export default {}
+export default {
+}
 </script>
 <style scoped>
 </style>
