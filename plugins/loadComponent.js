@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 
-import sample from '~/components/flexCss/sample';
+import sample from '~/components/header/sample';
 
 
 Vue.mixin({
