@@ -1,4 +1,4 @@
-<template>
+d<template>
   <div>
     <h1>.container {</h1>
     <div class="choiceFlex">
@@ -33,6 +33,7 @@
     <textarea type="textarea" class="textArea" 　v-model="theTextArea" @input="upDateStyle(true)" />
     <textarea type="textarea" class="textArea" 　v-model="textArea" @input="upDateStyle(false)" />
     <div class="container" :style="flexStyle">
+      <span class="right" @drag="moveBox"></span>
       <div class="box main" :style="theBoxStyle"></div>
       <div class="box" v-for="(box,index) in boxs" :key="index" :style="box"></div>
     </div>
@@ -55,7 +56,8 @@ export default {
       textArea:"width: 100px;\nmin-height: 100px;",
       boxStyle:"width: 100px;\nmin-height: 100px;",
       theTextArea:"width: 100px;\nmin-height: 100px;",
-      theBoxStyle:"{width: 100px;\nmin-height: 100px;"
+      theBoxStyle:"width: 100px;\nmin-height: 100px;",
+      width:"400px",
     }
   },
   computed:{
@@ -68,7 +70,8 @@ export default {
         flexWrap: this.flexWrap,
         justifyContent: this.flexJustify,
         alignItems:this.flexAlign,
-        flexDirection:this.flexDirection
+        flexDirection:this.flexDirection,
+        width:this.width
       }
       return myStyle
     },
@@ -94,6 +97,12 @@ export default {
     },
   },
   methods:{
+    moveBox(event){
+      if(event.clientX == 0){
+        return;
+        }
+        this.width = event.clientX + "px";
+    },
     upDateStyle(bool){
       let styleArray;
       if(bool){
@@ -102,7 +111,6 @@ export default {
          styleArray = this.textArea.split(/\n/);
       }
       let styleObj = new Object();
-      console.log(styleObj);
       for(const styleItem of styleArray){
         if(!styleItem.includes(":")) return;
         let keyValue = styleItem.split(":");
@@ -116,7 +124,6 @@ export default {
       }else {
         this.boxStyle = styleObj;
       }
-      console.log(this.boxStyle,this.theBoxStyle,bool);
     }
   },
   created(){
@@ -128,11 +135,12 @@ export default {
 <style lang="scss" scoped>
 $aaaa: pink;
 .container {
+  position: relative;
   display: flex;
-  width: 400px;
+  // width: 400px;
   height: 400px;
   background: $aaaa;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 .box {
   box-sizing: border-box;
@@ -165,5 +173,15 @@ h1 {
 .textArea {
   width: 300px;
   height: 100px;
+}
+.right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 10px;
+  border-right: 4px solid rgba(60, 60, 60, 1);
+  transform: translateX(50%);
+  cursor: col-resize;
 }
 </style>
